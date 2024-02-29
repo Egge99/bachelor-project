@@ -6,4 +6,4 @@ resources:
 - roles.yml
 - service.yml
 - deployment.yml
-- configmap.yml
+- config.yml
