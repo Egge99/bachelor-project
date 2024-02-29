@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-cloud-init-config
+data:
+  meta-data: ""
+  user-data: |
+    #cloud-config
+    runcmd:
+      - echo 'Hello, world!' > /home/fedora/hello-world
