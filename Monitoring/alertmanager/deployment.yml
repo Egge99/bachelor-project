@@ -32,7 +32,7 @@ spec:
         - name: config-volume
           mountPath: /etc/alertmanager
         - name: discord-webhook
-          mountPath: /etc/alertmanager/secrets/discord-webhook
+          mountPath: /etc/alertmanager/secrets
           readOnly: true
       volumes:
       - name: config-volume
