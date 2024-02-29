@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: blackbox-exporter
+  namespace: monitoring
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port:   '9115'
+
+spec:
+  selector: 
+    app: blackbox-exporter
+  type: NodePort  
+  ports:
+    - port: 8080
+      targetPort: 9115 
+      nodePort: 30002
+```

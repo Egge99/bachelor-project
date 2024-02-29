@@ -1,0 +1,43 @@
+# This file is used to deploy the alertmanager service
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alertmanager
+  namespace: monitoring
+  labels:
+    app: alertmanager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alertmanager
+  template:
+    metadata:
+      labels:
+        app: alertmanager
+    spec:
+      containers:
+      - name: alertmanager
+        image: docker.io/prom/alertmanager:latest
+        ports:
+        - containerPort: 9093
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/alertmanager
+        - name: discord-webhook
+          mountPath: /etc/alertmanager/secrets/discord-webhook
+          readOnly: true
+      volumes:
+      - name: config-volume
+        configMap:
+          name: alertmanager-config
+      - name: discord-webhook
+        secret:
+          secretName: discord-webhook

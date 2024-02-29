@@ -1,0 +1,40 @@
+#I want to create a deployment for blackbox exporter
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blackbox-exporter
+  namespace: monitoring
+  labels:
+    app: blackbox-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blackbox-exporter
+  template:
+    metadata:
+      labels:
+        app: blackbox-exporter
+    spec:
+      containers:
+      - name: blackbox-exporter
+        image: prom/blackbox-exporter:latest
+        args:
+          - "--config.file=/etc/blackbox-exporter/config.yml"
+        ports:
+          - containerPort: 9115
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+        volumeMounts:
+          - name: config-volume
+            mountPath: /etc/blackbox-exporter
+      volumes:
+      - name: config-volume
+        configMap:
+          name: blackbox-exporter-configuration
