@@ -12,7 +12,7 @@ spec:
     app: blackbox-exporter
   type: NodePort  
   ports:
-    - port: 8080
+    - port: 9115
       targetPort: 9115 
       nodePort: 30002
-```
+
