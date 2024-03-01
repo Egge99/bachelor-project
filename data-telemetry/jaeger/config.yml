@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jaeger-config
+  namespace: jaeger
+data:
+  config.yml: |
+    log-level: debug
+  
+  sampling_strategies.json: |
+    {
+      "service_strategies": [
+        {
+          "service": ".*",
+          "type": "probabilistic",
+          "param": 0.1
+        }
+      ]
+    }
+

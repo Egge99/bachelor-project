@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jaeger
+  namespace: jaeger
+  labels:
+    app: jaeger
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jaeger
+  template:
+    metadata:
+      labels:
+        app: jaeger
+    spec:
+      containers:
+      - name: jaeger
+        image: docker.io/jaegertracing/all-in-one:1.54
+        ports: 
+        - containerPort: 16686
+        resources:
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+        volumeMounts:
+        - name: jaeger-config
+          mountPath: /etc/jaeger
+        args:
+        - "--config-file=/etc/jaeger/config.yml"
+        - "--sampling.strategies-file=/etc/jaeger/sampling_strategies.json"
+      volumes:
+      - name: jaeger-config
+        configMap:
+          name: jaeger-config
