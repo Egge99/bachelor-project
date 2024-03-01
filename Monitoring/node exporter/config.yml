@@ -1,5 +1,5 @@
 apiVersion: v1
-kind: configMap
+kind: ConfigMap
 metadata:
   name: node-exporter-config
   namespace: monitoring
@@ -10,4 +10,22 @@ data:
     scrape_configs:
     - job_name: 'node-exporter'
       static_configs:
-      - targets: ['localhost 
+      - targets: ['localhost:9100']
+    - job_name: 'kubernetes-node-exporter'
+      kubernetes_sd_configs:
+      - role: pod
+        namespaces:
+          names:
+            - monitoring
+      relabel_configs:
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+          action: keep
+          regex: true
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_port]
+          action: replace
+          target_label: __address__
+          regex: (.+)
+          replacement: ${1}:9100
+        - action: labelmap
+          regex: __meta_kubernetes_pod_label_(.+)
+
