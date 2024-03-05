@@ -1,0 +1,24 @@
+---
+# Source: longhorn/templates/deployment-ui.yaml
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app.kubernetes.io/name: longhorn
+    helm.sh/chart: longhorn-1.6.0
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: longhorn
+    app.kubernetes.io/version: v1.6.0
+    app: longhorn-ui
+  name: longhorn-frontend
+  namespace: longhorn-system
+spec:
+  type: NodePort
+  selector:
+    app: longhorn-ui
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8000
+      nodePort: 30040
+      protocol: TCP

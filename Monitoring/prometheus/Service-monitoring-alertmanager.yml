@@ -1,0 +1,24 @@
+---
+# Source: prometheus/charts/alertmanager/templates/services.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: monitoring-alertmanager
+  labels:
+    helm.sh/chart: alertmanager-1.9.0
+    app.kubernetes.io/name: alertmanager
+    app.kubernetes.io/instance: monitoring
+    app.kubernetes.io/version: "v0.27.0"
+    app.kubernetes.io/managed-by: Helm
+  namespace: default
+spec:
+  type: NodePort
+  ports:
+    - port: 9093
+      targetPort: http
+      protocol: TCP
+      name: http
+      nodePort: 30093
+  selector:
+    app.kubernetes.io/name: alertmanager
+    app.kubernetes.io/instance: monitoring

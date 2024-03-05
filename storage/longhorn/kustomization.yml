@@ -1,0 +1,25 @@
+#make a kustomization file to deploy evey file in this folder
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ClusterRoleBinding-longhorn-bind.yml
+- ClusterRoleBinding-longhorn-support-bundle.yml
+- ClusterRole-longhorn-role.yml
+- ConfigMap-longhorn-default-setting.yml
+- ConfigMap-longhorn-storageclass.yml
+- DaemonSet-longhorn-manager.yml
+- Deployment-longhorn-driver-deployer.yml
+- Deployment-longhorn-ui.yml
+- Job-longhorn-post-upgrade.yml
+- Job-longhorn-pre-upgrade.yml
+- PriorityClass-longhorn-critical.yml
+- ServiceAccount-longhorn-service-account.yml
+- ServiceAccount-longhorn-support-bundle.yml
+- ServiceAccount-longhorn-ui-service-account.yml
+- Service-longhorn-admission-webhook.yml
+- Service-longhorn-backend.yml
+- Service-longhorn-conversion-webhook.yml
+- Service-longhorn-engine-manager.yml
+- Service-longhorn-frontend.yml
+- Service-longhorn-recovery-backend.yml
+- Service-longhorn-replica-manager.yml

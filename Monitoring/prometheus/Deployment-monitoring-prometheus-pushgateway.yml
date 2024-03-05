@@ -1,0 +1,63 @@
+---
+# Source: prometheus/charts/prometheus-pushgateway/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    helm.sh/chart: prometheus-pushgateway-2.7.1
+    app.kubernetes.io/name: prometheus-pushgateway
+    app.kubernetes.io/instance: monitoring
+    app.kubernetes.io/version: "v1.7.0"
+    app.kubernetes.io/managed-by: Helm
+  name: monitoring-prometheus-pushgateway
+  namespace: default
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: prometheus-pushgateway
+      app.kubernetes.io/instance: monitoring
+  template:
+    metadata:
+      labels:
+        helm.sh/chart: prometheus-pushgateway-2.7.1
+        app.kubernetes.io/name: prometheus-pushgateway
+        app.kubernetes.io/instance: monitoring
+        app.kubernetes.io/version: "v1.7.0"
+        app.kubernetes.io/managed-by: Helm
+    spec:
+      serviceAccountName: monitoring-prometheus-pushgateway
+      automountServiceAccountToken: true
+      containers:
+        - name: pushgateway
+          image: "quay.io/prometheus/pushgateway:v1.7.0"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: metrics
+              containerPort: 9091
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /-/healthy
+              port: 9091
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /-/ready
+              port: 9091
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+          volumeMounts:
+            - name: storage-volume
+              mountPath: "/data"
+              subPath: ""
+      securityContext:
+        fsGroup: 65534
+        runAsNonRoot: true
+        runAsUser: 65534
+      volumes:
+        - name: storage-volume
+          emptyDir: {}
