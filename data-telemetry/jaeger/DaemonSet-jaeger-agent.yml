@@ -1,0 +1,65 @@
+---
+# Source: jaeger/templates/agent-ds.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: jaeger-agent
+  labels:
+    helm.sh/chart: jaeger-1.0.2
+    app.kubernetes.io/name: jaeger
+    app.kubernetes.io/instance: jaeger
+    app.kubernetes.io/version: "1.53.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: agent
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: jaeger
+      app.kubernetes.io/instance: jaeger
+      app.kubernetes.io/component: agent
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: jaeger
+        app.kubernetes.io/instance: jaeger
+        app.kubernetes.io/component: agent
+    spec:
+      securityContext: {}
+      dnsPolicy: ClusterFirst
+      serviceAccountName: jaeger-agent
+      containers:
+        - name: jaeger-agent
+          securityContext: {}
+          image: docker.io/jaegertracing/jaeger-agent:1.53.0
+          imagePullPolicy: IfNotPresent
+          args:
+          env:
+            - name: REPORTER_GRPC_HOST_PORT
+              value: jaeger-collector:14250
+          ports:
+            - name: zipkin-compact
+              containerPort: 5775
+              protocol: UDP
+            - name: jaeger-compact
+              containerPort: 6831
+              protocol: UDP
+            - name: jaeger-binary
+              containerPort: 6832
+              protocol: UDP
+            - name: http
+              containerPort: 5778
+              protocol: TCP
+            - name: admin
+              containerPort: 14271
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: admin
+          readinessProbe:
+            httpGet:
+              path: /
+              port: admin
+          resources: {}
+          volumeMounts:
+      volumes:

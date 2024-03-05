@@ -1,0 +1,8 @@
+NAME: jaeger
+LAST DEPLOYED: Tue Mar  5 16:10:49 2024
+NAMESPACE: default
+STATUS: pending-install
+REVISION: 1
+TEST SUITE: None
+HOOKS:
+MANIFEST:

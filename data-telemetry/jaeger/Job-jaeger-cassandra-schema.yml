@@ -1,0 +1,59 @@
+---
+# Source: jaeger/templates/cassandra-schema-job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: jaeger-cassandra-schema
+  labels:
+    helm.sh/chart: jaeger-1.0.2
+    app.kubernetes.io/name: jaeger
+    app.kubernetes.io/instance: jaeger
+    app.kubernetes.io/version: "1.53.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: cassandra-schema
+spec:
+  activeDeadlineSeconds: 300
+  template:
+    metadata:
+      name: jaeger-cassandra-schema
+    spec:
+      securityContext: {}
+      serviceAccountName: jaeger-cassandra-schema
+      containers:
+        - name: jaeger-cassandra-schema
+          image: docker.io/jaegertracing/jaeger-cassandra-schema:1.53.0
+          imagePullPolicy: IfNotPresent
+          securityContext: {}
+          env:
+            - name: CASSANDRA_SERVERS
+              value: jaeger-cassandra
+            - name: CASSANDRA_PORT
+              value: "9042"
+            - name: CASSANDRA_KEYSPACE
+              value: jaeger_v1_test
+            - name: CASSANDRA_USERNAME
+              value: user
+            - name: CASSANDRA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: jaeger-cassandra
+                  key: password
+            - name: CQLSH_HOST
+              value: jaeger-cassandra
+            - name: DATACENTER
+              value: "dc1"
+            - name: KEYSPACE
+              value: jaeger_v1_test
+          resources: {}
+          volumeMounts:
+      restartPolicy: OnFailure
+      volumes:
+NOTES:
+###################################################################
+### IMPORTANT: Ensure that storage is explicitly configured     ###
+### Default storage options are subject to change.              ###
+###                                                             ###
+### IMPORTANT: The use of <component>.env: {...} is deprecated. ###
+### Please use <component>.extraEnv: [] instead.                ###
+###################################################################
+You can log into the Jaeger Query UI here: export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/instance=jaeger,app.kubernetes.io/component=query" -o jsonpath="{.items[0].metadata.name}") echo http://127.0.0.1:8080/ kubectl port-forward --namespace default $POD_NAME 8080:16686

@@ -1,0 +1,33 @@
+---
+# Source: jaeger/charts/cassandra/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: jaeger-cassandra
+  labels:
+    app: cassandra
+    chart: cassandra-0.15.3
+    release: jaeger
+    heritage: Helm
+spec:
+  clusterIP: None
+  type: ClusterIP
+  ports:
+    - name: intra
+      port: 7000
+      targetPort: 7000
+    - name: tls
+      port: 7001
+      targetPort: 7001
+    - name: jmx
+      port: 7199
+      targetPort: 7199
+    - name: cql
+      port: 9042
+      targetPort: 9042
+    - name: thrift
+      port: 9160
+      targetPort: 9160
+  selector:
+    app: cassandra
+    release: jaeger

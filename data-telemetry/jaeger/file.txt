@@ -1,10 +1,10 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
 - DaemonSet-jaeger-agent.yml
 - Deployment-jaeger-collector.yml
 - Deployment-jaeger-query.yml
+- file.txt
+- jaeger-operator
 - Job-jaeger-cassandra-schema.yml
+- old
 - Secret-jaeger-cassandra.yml
 - ServiceAccount-jaeger-agent.yml
 - ServiceAccount-jaeger-cassandra-schema.yml
