@@ -1,5 +1,5 @@
 ---
-# Source: prometheus/charts/alertmanager/templates/configmap.yaml
+# Source: alertmanager/templates/configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -15,11 +15,13 @@ data:
   alertmanager.yml: |
     global: {}
     receivers:
-    - name: default-receiver
+    - name: 'discord-webhook'
+      discord_configs:
+      - webhook_url: 'https://discord.com/api/webhooks/1212745417134055495/XC8TbIF1SVFjQuObydyu8SYL8qsJ9d4R4wBMFLrjAKxsBpPlRPsA5HO5_RI6Uqsi3EoM'
     route:
       group_interval: 5m
       group_wait: 10s
-      receiver: default-receiver
+      receiver: 'discord-webhook'
       repeat_interval: 3h
     templates:
     - /etc/alertmanager/*.tmpl

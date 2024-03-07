@@ -16,7 +16,16 @@ metadata:
 data:
   allow-snippet-annotations: "false"
   alerting_rules.yml: |
-    {}
+      groups:
+      - name: demo alert
+        rules:
+        - alert: High Pod Memory
+          expr: sum(container_memory_usage_bytes) > 1
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: High Memory Usage
   alerts: |
     {}
   prometheus.yml: |

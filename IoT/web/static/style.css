@@ -1,0 +1,49 @@
+body {
+    background-size: cover; /* Scale the image to cover the entire background */
+    background-repeat: no-repeat; /* Prevent image repetition */
+    background-color: rgb(155, 155, 155);
+    color: #000000;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.container {
+    background-color: rgba(255, 173, 173, 0.5); /* Add a semi-transparent pink background for content */
+    padding: 20px;
+}
+
+.message-box {
+    padding: 10px;
+    margin: 10px auto; /* Keep it centered */
+    border: 1px solid green;
+    background-color: lightgreen;
+    color: green;
+    border-radius: 5px;
+    display: inline-block; /* Adjust to inline-block */
+    max-width: 80%; /* Max width to prevent it from stretching too wide */
+    min-width: 20%; /* Min width for aesthetics */
+    word-wrap: break-word; /* Ensure text wraps */
+    text-align: left; /* Align text inside the box to the left */
+}
+
+
+
+.list-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 30%; /* Adjust the width as necessary */
+    height: 100%;
+    overflow-y: auto; /* Makes the list scrollable */
+    background-color: rgba(87, 87, 87, 0.5); /* Semi-transparent background */
+    padding: 20px;
+}
+
+#devicesList {
+    height: calc(100% - 50px); /* Adjust height to make room for the button */
+    overflow-y: auto; /* Ensure this part is scrollable */
+}
+
+button {
+    margin-top: 20px;
+}

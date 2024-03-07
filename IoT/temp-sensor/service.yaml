@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: temp-sensor-service
+  name: temp-sensor
   namespace: iot
 spec:
   selector:
-    sensor-id: "1"  # Match the label of the sensor you want to target
+    app: temp-sensor
   ports:
     - protocol: TCP
       port: 80

@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: temp-sensor
+  name: humidity-sensor
   namespace: iot
 spec:
-  replicas: 30
+  replicas: 1
   selector:
     matchLabels:
-      app: temp-sensor
+      app: humidity-sensor
   template:
     metadata:
       labels:
-        app: temp-sensor
+        app: humidity-sensor
     spec:
       containers:
-      - name: temp-sensor
-        image: ghcr.io/bjornarron/temperature-sensor:latest
+      - name: humidity-sensor
+        image: ghcr.io/bjornarron/humidity-sensor:latest
         resources:
           limits:
             memory: "64Mi"

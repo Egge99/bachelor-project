@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kubernetes IoT Deployment GUI</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+<body>
+    <h1>Kubernetes IoT Deployment GUI</h1>
+    <div id="sensorTypes">
+        <button onclick="deploySensor('temp-sensor')">Deploy Temp Sensor</button>
+        <button onclick="deploySensor('hum-sensor')">Deploy Humidity Sensor</button>
+        <button onclick="deploySensor('smartlock')">Deploy Smartlock</button>
+    </div>
+    <div id="response"></div>
+    <div class="list-container">
+        <div id="devicesList">Loading devices...</div>
+        <button onclick="deleteAllDevices()">Delete All</button>
+    </div>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
