@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: smartlock
-  namespace: iot-monitoring
+  namespace: iot
 spec:
   replicas: 1
   selector:
