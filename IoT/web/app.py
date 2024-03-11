@@ -1,5 +1,6 @@
 from flask import Flask, jsonify
 from kubernetes import client, config
+from kubernetes.config.config_exception import ConfigException
 import requests
 import yaml, os, time
 from uuid import uuid4
@@ -19,8 +20,14 @@ DEPLOYMENT_DIRS = {
 def gui():
     return render_template('index.html')
 
-# Configuring Kubernetes client
-config.load_kube_config()  # This loads the current kubeconfig file
+
+try:
+    # Use in-cluster config if available
+    config.load_incluster_config()
+except ConfigException:
+    # Fall back to kubeconfig file
+    config.load_kube_config()
+
 k8s_client = client.CoreV1Api()
 apps_v1 = client.AppsV1Api()
 core_v1 = client.CoreV1Api()
