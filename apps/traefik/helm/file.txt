@@ -1,0 +1,8 @@
+- ClusterRoleBinding-traefik-default.yml
+- ClusterRole-traefik-default.yml
+- Deployment-traefik.yml
+- file.txt
+- IngressClass-traefik.yml
+- kustomization.yml
+- ServiceAccount-traefik.yml
+- Service-traefik.yml

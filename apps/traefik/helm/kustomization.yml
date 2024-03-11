@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ClusterRoleBinding-traefik-default.yml
+- ClusterRole-traefik-default.yml
+- Deployment-traefik.yml
+- IngressClass-traefik.yml
+- ServiceAccount-traefik.yml
+- Service-traefik.yml
