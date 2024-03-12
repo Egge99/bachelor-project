@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: longhorn-ingress
+  namespace: longhorn-system
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: (PathPrefix(`/longhorn`))
+    kind: Rule
+    services:
+    - name: longhorn-frontend
+      port: 80

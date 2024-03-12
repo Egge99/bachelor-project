@@ -97,6 +97,7 @@ spec:
             - "--entrypoints.websecure.address=:8443/tcp"
             - "--api.dashboard=true"
             - "--ping=true"
+            - "--api=true"
             - "--metrics.prometheus=true"
             - "--metrics.prometheus.entrypoint=metrics"
             - "--providers.kubernetescrd"

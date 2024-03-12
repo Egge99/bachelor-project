@@ -12,7 +12,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
   annotations:
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app.kubernetes.io/name: traefik
     app.kubernetes.io/instance: traefik-default
@@ -21,7 +21,11 @@ spec:
       name: "web"
       targetPort: web
       protocol: TCP
+      nodePort: 30080
     - port: 443
       name: "websecure"
       targetPort: websecure
       protocol: TCP
+      nodePort: 30443
+
+     

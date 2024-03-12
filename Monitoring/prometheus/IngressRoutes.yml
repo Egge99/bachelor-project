@@ -1,0 +1,27 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prometheus-dashboard
+  namespace: default
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: (PathPrefix(`/prometheus`))
+      kind: Rule
+      services:
+        - name: monitoring-prometheus-server
+          port: 80
+          kind: Service
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: strip-prefix
+  namespace: default
+spec:
+  stripPrefix:
+    prefixes:
+      - "/prometheus"

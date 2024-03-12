@@ -7,3 +7,4 @@ resources:
 - IngressClass-traefik.yml
 - ServiceAccount-traefik.yml
 - Service-traefik.yml
+- IngressRoute.yml
