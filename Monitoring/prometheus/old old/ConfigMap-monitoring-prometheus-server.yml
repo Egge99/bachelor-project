@@ -17,16 +17,6 @@ data:
   allow-snippet-annotations: "false"
   alerting_rules.yml: |
       groups:
-      - name: High memory utilization
-        rules:
-        - alert: HighMemoryUtilization
-          expr: node_memory_MemTotal_bytes - node_memory_MemFree_bytes < 0.8 * node_memory_MemTotal_bytes
-          for: 5m
-          labels:
-            severity: warning
-          annotations:
-            summary: High memory utilization on host {{ $labels.instance }} 
-            description: The memory utilization on host {{ $labels.instance }} has exceeded 80% for 5 minutes.
       - name: Node Down
         rules:
         - alert: NodeDown
@@ -41,8 +31,8 @@ data:
     {}
   prometheus.yml: |
     global:
-      evaluation_interval: 1m
-      scrape_interval: 1m
+      evaluation_interval: 15s
+      scrape_interval: 15s
       scrape_timeout: 10s
     rule_files:
     - /etc/config/recording_rules.yml

@@ -19,4 +19,4 @@ resources:
 - Service-monitoring-prometheus-node-exporter.yml
 - Service-monitoring-prometheus-pushgateway.yml
 - Service-monitoring-prometheus-server.yml
-- IngressRoutes.yml
+#- Service-monitoring-nginx-metrics.yml

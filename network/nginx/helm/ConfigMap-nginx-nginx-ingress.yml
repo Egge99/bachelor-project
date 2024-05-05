@@ -1,0 +1,26 @@
+---
+# Source: nginx-ingress/templates/controller-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-nginx-ingress
+  namespace: nginx
+  labels:
+    helm.sh/chart: nginx-ingress-1.1.3
+    app.kubernetes.io/name: nginx-ingress
+    app.kubernetes.io/instance: nginx
+    app.kubernetes.io/version: "3.4.3"
+    app.kubernetes.io/managed-by: Helm
+data:
+  nginx.conf: |
+    # Number of nginx worker processes.
+    worker_processes 1;
+    # Set the maximum number of connections per worker.
+    events {
+      worker_connections 1024;
+    }
+    # Set the keepalive timeout for incoming connections.
+
+
+
+ 

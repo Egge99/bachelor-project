@@ -1,0 +1,20 @@
+---
+# Source: nginx-ingress/templates/clusterrolebiding.yaml
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: nginx-nginx-ingress
+  labels:
+    helm.sh/chart: nginx-ingress-1.1.3
+    app.kubernetes.io/name: nginx-ingress
+    app.kubernetes.io/instance: nginx
+    app.kubernetes.io/version: "3.4.3"
+    app.kubernetes.io/managed-by: Helm
+subjects:
+  - kind: ServiceAccount
+    name: nginx-nginx-ingress
+    namespace: nginx
+roleRef:
+  kind: ClusterRole
+  name: nginx-nginx-ingress
+  apiGroup: rbac.authorization.k8s.io

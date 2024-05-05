@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    lesson: "082"
+  name: monitoring-prometheus-pushgateway
+  namespace: deafult
+spec:
+  endpoints:
+  - honorLabels: true
+    port: http
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: monitoring-prometheus-pushgateway

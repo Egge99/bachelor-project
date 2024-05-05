@@ -1,0 +1,89 @@
+---
+# Source: nginx-ingress/templates/clusterrole.yaml
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: nginx-nginx-ingress
+  labels:
+    helm.sh/chart: nginx-ingress-1.1.3
+    app.kubernetes.io/name: nginx-ingress
+    app.kubernetes.io/instance: nginx
+    app.kubernetes.io/version: "3.4.3"
+    app.kubernetes.io/managed-by: Helm
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+      - namespaces
+      - pods
+      - secrets
+      - services
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - create
+      - patch
+      - list
+  - apiGroups:
+      - coordination.k8s.io
+    resources:
+      - leases
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - discovery.k8s.io
+    resources:
+      - endpointslices
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingressclasses
+    verbs:
+      - get
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses/status
+    verbs:
+      - update
+  - apiGroups:
+      - k8s.nginx.org
+    resources:
+      - virtualservers
+      - virtualserverroutes
+      - globalconfigurations
+      - transportservers
+      - policies
+    verbs:
+      - list
+      - watch
+      - get
+  - apiGroups:
+      - k8s.nginx.org
+    resources:
+      - virtualservers/status
+      - virtualserverroutes/status
+      - policies/status
+      - transportservers/status
+    verbs:
+      - update

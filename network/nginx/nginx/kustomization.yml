@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- clusterrolebinding.yaml
+- clusterrole.yaml
+- controller-configmap.yaml
+- controller-deployment.yaml
+- controller-ingressclass.yaml
+- controller-poddisruptionbudget.yaml
+- controller-rolebinding.yaml
+- controller-role.yaml
+- controller-serviceaccount.yaml
+#- controller-service-metrics.yaml
+#- controller-servicemonitor.yaml
+- controller-service.yaml

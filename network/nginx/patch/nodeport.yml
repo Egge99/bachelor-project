@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-nginx-ingress-controller
+  namespace: nginx
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      nodePort: 30080
+    - name: https
+      nodePort: 30443

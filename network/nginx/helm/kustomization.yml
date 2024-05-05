@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ClusterRoleBinding-nginx-nginx-ingress.yml
+- ClusterRole-nginx-nginx-ingress.yml
+- ConfigMap-nginx-ingress-leader.yml
+- ConfigMap-nginx-nginx-ingress.yml
+- Deployment-nginx-nginx-ingress-controller.yml
+- RoleBinding-nginx-nginx-ingress.yml
+- Role-nginx-nginx-ingress.yml
+- ServiceAccount-nginx-nginx-ingress.yml
+- Service-nginx-nginx-ingress-controller.yml
+- gui-ingress.yml
